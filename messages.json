@@ -1,0 +1,16 @@
+[
+  {
+    "messageID": "5319258686",
+    "messageNumber": 1,
+    "recipient": "+27791091905",
+    "messageText": "hey",
+    "messageHash": "A0039C6EE3EC894C0F43E1AB11DF6420"
+  },
+  {
+    "messageID": "3355736245",
+    "messageNumber": 2,
+    "recipient": "0791091905",
+    "messageText": "hey",
+    "messageHash": "3F60B9FE9438592AB365FB92B4D10E98"
+  }
+]
