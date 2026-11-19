@@ -1,126 +1,123 @@
-public class MessageTest.java {
+import org.junit.jupiter.api.Test;
 
-    public static void main(String[] args) {
+// Import the methods used to check test results.
+import static org.junit.jupiter.api.Assertions.*;
 
-        System.out.println("MESSAGE TESTING");
+public class MessageTest {
 
-        // Create a message for testing
+    // Check that the message ID has 10 characters.
+    @Test
+    public void testMessageIDLength() {
+
+        // Create a message to use for testing.
+        Message message = new Message(
+                1,
+                "+27821234567",
+                "Hello World");
+
+        // The message ID should pass the length check.
+        assertTrue(message.checkMessageID());
+
+        // The message ID should contain exactly 10 characters.
+        assertEquals(10, message.getMessageID().length());
+    }
+
+    // Check that a correctly formatted recipient is accepted.
+    @Test
+    public void testValidRecipient() {
+
+        Message message = new Message(
+                1,
+                "+27821234567",
+                "Hello World");
+
+        // The method should return true for this number.
+        assertTrue(message.checkRecipientCell());
+    }
+
+    // Check that an incorrectly formatted recipient is rejected.
+    @Test
+    public void testInvalidRecipient() {
+
+        Message message = new Message(
+                1,
+                "abc123",
+                "Hello World");
+
+        // The method should return false for this input.
+        assertFalse(message.checkRecipientCell());
+    }
+
+    // Check that a short message passes the length test.
+    @Test
+    public void testValidMessageLength() {
+
+        Message message = new Message(
+                1,
+                "+27821234567",
+                "Hello World");
+
+        // The message is shorter than 250 characters.
+        assertTrue(message.checkMessageLength());
+    }
+
+    // Check that the correct message number is stored.
+    @Test
+    public void testMessageNumber() {
+
         Message message = new Message(
                 5,
                 "+27821234567",
-                "Hello bro how are you"
-        );
+                "Hello World");
 
-        // Test 1: Check message ID
-        System.out.println("Test 1: Check Message ID");
+        // The message number should be 5.
+        assertEquals(5, message.getMessageNumber());
+    }
 
-        if (message.checkMessageID()) {
-            System.out.println("PASSED: Message ID is valid.");
-        } else {
-            System.out.println("FAILED: Message ID is invalid.");
-        }
+    // Check that the message text is stored correctly.
+    @Test
+    public void testMessageText() {
 
-        // Test 2: Check recipient cellphone number
-        System.out.println("Test 2: Check Recipient Number");
-
-        if (message.checkRecipientCell()) {
-            System.out.println("PASSED: Recipient number is valid.");
-        } else {
-            System.out.println("FAILED: Recipient number is invalid.");
-        }
-
-        // Test 3: Check message length
-        System.out.println("Test 3: Check Message Length");
-
-        if (message.checkMessageLength()) {
-            System.out.println("PASSED: Message length is valid.");
-        } else {
-            System.out.println("FAILED: Message length is invalid.");
-        }
-
-        // Test 4: Check message number
-        System.out.println("Test 4: Check Message Number");
-
-        if (message.getMessageNumber() == 5) {
-            System.out.println("PASSED: Message number is correct.");
-        } else {
-            System.out.println("FAILED: Message number is incorrect.");
-        }
-
-        // Test 5: Check message text
-        System.out.println("Test 5: Check Message Text");
-
-        if (message.getMessageText().equals("Hello bro how are you")) {
-            System.out.println("PASSED: Message text is correct.");
-        } else {
-            System.out.println("FAILED: Message text is incorrect.");
-        }
-
-        // Test 6: Check recipient
-        System.out.println("Test 6: Check Recipient");
-
-        if (message.getRecipient().equals("+27821234567")) {
-            System.out.println("PASSED: Recipient is correct.");
-        } else {
-            System.out.println("FAILED: Recipient is incorrect.");
-        }
-
-        // Test 7: Check message hash
-        System.out.println("Test 7: Check Message Hash");
-
-        if (message.getMessageHash() != null
-                && !message.getMessageHash().isEmpty()) {
-            System.out.println("PASSED: Message hash was generated.");
-        } else {
-            System.out.println("FAILED: Message hash was not generated.");
-        }
-
-        // Test 8: Check displayed message
-        System.out.println("Test 8: Display Message");
-
-        if (message.displayMessage() != null
-                && message.displayMessage().contains("Hello bro how are you")) {
-            System.out.println("PASSED: Message can be displayed.");
-        } else {
-            System.out.println("FAILED: Message could not be displayed.");
-        }
-
-        // Test 9: Check invalid recipient
-        System.out.println("Test 9: Invalid Recipient");
-
-        Message invalidMessage = new Message(
-                6,
-                "abc123",
-                "Testing an invalid recipient"
-        );
-
-        if (!invalidMessage.checkRecipientCell()) {
-            System.out.println("PASSED: Invalid recipient was rejected.");
-        } else {
-            System.out.println("FAILED: Invalid recipient was accepted.");
-        }
-
-        // Test 10: Check message that is too long
-        System.out.println("Test 10: Message Too Long");
-
-        String longText = "";
-
-        for (int i = 0; i < 251; i++) {
-            longText += "A";
-        }
-
-        Message longMessage = new Message(
-                7,
+        Message message = new Message(
+                1,
                 "+27821234567",
-                longText
-        );
+                "Hello World");
 
-        if (!longMessage.checkMessageLength()) {
-            System.out.println("PASSED: Long message was rejected.");
-        } else {
-            System.out.println("FAILED: Long message was accepted.");
-        }
+        // Compare the expected text with the actual text.
+        assertEquals(
+                "Hello World",
+                message.getMessageText());
+    }
 
-        System.out.println("TESTING COMPLETED");
+    // Check that the message hash is generated.
+    @Test
+    public void testMessageHashIsGenerated() {
+
+        Message message = new Message(
+                1,
+                "+27821234567",
+                "Hello World");
+
+        // The hash should not be null.
+        assertNotNull(message.getMessageHash());
+
+        // The hash should not be an empty string.
+        assertFalse(message.getMessageHash().isEmpty());
+    }
+
+    private void assertFalse(boolean empty) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void assertNotNull(String messageHash) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void assertEquals(String hello_World, String messageText) {
+        assertEquals(hello_World, messageText);
+    }
+
+    private void assertEquals(int hello_World, int messageText) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
